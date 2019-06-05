@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<h1 style="text-align: center;">POINTS</h1>
+<h1 style="text-align: center;" class="score">0</h1>
+<div style="display: flex; margin-left: 15%;">
+	<div style="width: 250px; height: 250px; border: 1px solid white; background-color: green;">
+		<img src="" style="width: 250px; height: 250px; display: none;" class="img">
+	</div>
+	<div style="width: 250px; height: 250px; border: 1px solid white; background-color: green;">
+		<img src="" style="width: 250px; height: 250px; display: none;" class="img">
+	</div>
+	<div style="width: 250px; height: 250px; border: 1px solid white; background-color: green;">
+		<img src="" style="width: 250px; height: 250px; display: none;" class="img">
+	</div>
+	<div style="width: 250px; height: 250px; border: 1px solid white; background-color: green;">
+		<img src="" style="width: 250px; height: 250px; display: none;" class="img">
+	</div>
+</div>
+<div style="display: flex; margin-left: 15%;">
+	<div style="width: 250px; height: 250px; border: 1px solid white; background-color: green;">
+		<img src="" style="width: 250px; height: 250px; display: none;" class="img">
+	</div>
+	<div style="width: 250px; height: 250px; border: 1px solid white; background-color: green;">
+		<img src="" style="width: 250px; height: 250px; display: none;" class="img">
+	</div>
+	<div style="width: 250px; height: 250px; border: 1px solid white; background-color: green;">
+		<img src="" style="width: 250px; height: 250px; display: none;" class="img">
+	</div>
+	<div style="width: 250px; height: 250px; border: 1px solid white; background-color: green;">
+		<img src="" style="width: 250px; height: 250px; display: none;" class="img">
+	</div>
+</div>
+
+<script type="text/javascript">
+let score = 0
+let imgs = document.querySelectorAll(".img")
+let rndm = function(n){
+	return Math.round(Math.random()*(n))
+}
+let perses = ["Ice_King.png","Jake.png"]
+let img
+let pers
+let time_for_jake = 600
+let time_for_king = 900
+let up = function(){
+	img = imgs[rndm(8)]
+	pers = rndm(1)
+	img.style.display = "block"
+	img.src = perses[pers]
+	let none = function(){
+		img.style.display = "none"
+	}
+	if (pers == 1) {setTimeout(none,time_for_jake)} else if (pers == 0) {setTimeout(none,time_for_king)}
+	img.onclick = function(){
+		if (pers == 1) {
+			score += 1
+			document.querySelector(".score").innerHTML = score
+			img.style.display = "none"
+			if (score == 5) {
+				alert("You win")
+				clearInterval(I)
+			}
+		} else if (pers == 0) {
+			score -= 1
+			document.querySelector(".score").innerHTML = score
+			img.style.display = "none"
+			if (score == -5) {
+				alert("You lose")
+				clearInterval(I)
+			}
+		}
+	}
+}
+let beemo = function(){
+	imgBeemo = imgs[rndm(8)]
+	imgBeemo.style.display = "block"
+	imgBeemo.src = "bimo.png"
+	let noneBeemo = function(){
+		imgBeemo.style.display = "none"
+	}
+	setTimeout(noneBeemo,500)
+	imgBeemo.onclick = function(){
+		if (time_for_jake < 900) {
+			clearInterval(I)
+			time_for_jake += 100
+			time_for_king -= 100
+			I = setInterval(up,1000)
+		} else {
+			score += 2
+			document.querySelector(".score").innerHTML = score
+			img.style.display = "none"
+			if (score == 5) {
+				alert("You win")
+				clearInterval(I)
+			}
+		}
+	}
+}
+let IBeemo = setInterval(beemo,4000)
+let I = setInterval(up,1000)
+
+
+
+</script>
+</body>
+</html>
